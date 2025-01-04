@@ -1,137 +1,253 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
-
 <head>
     <title>HomePage</title>
     <style>
-        .carousel-control-prev, .carousel-control-next {
-            width: 2%;
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right top, #3200cf, #0041e4, #0063f3, #0080fb, #009bff, #24aaff, #43b8ff, #60c6ff, #75cdff, #89d5ff, #9bdcff, #ade3ff);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the content horizontally */
+            height: 100vh; /* Full viewport height */
+            width: 100vw; /* Full viewport width */
+            background-image: url('/static/assets/images/homePage.png'); /* Replace with your actual image path */
+            background-size: cover; /* Scale the image to cover the entire section */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the image */
+            position: relative; /* Position relative for inner content */
+            z-index: 1;
+            overflow: hidden; /* Prevent any overflow */
+        }
+
+        /* Hero Text */
+        .hero-text {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for perfect centering */
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); /* Add shadow for readability */
+            max-width: 80%;
+        }
+
+        /* Full Page Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+
+        .hero-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-text .btn {
+            background-color: #0041e4;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .hero-text .btn:hover {
+            background-color: #009bff;
+        }
+
+        .hero-image img {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-height: 1200px;
+            max-width: 1200px;
+        }
+
+        /* Carousel Section */
+        .carousel {
+            margin: 190px 20px;
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 1 0 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            border-radius: 10px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card h5 {
+            margin: 15px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .card-button {
+            background-color: #0041e4;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .card-button:hover {
+            background-color: #009bff;
+        }
+
+        /* Carousel Controls */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            z-index: 2;
         }
 
         .carousel-control-prev {
-            left: -60px !important;
+            left: 10px;
         }
 
         .carousel-control-next {
-            right: 5px !important;
+            right: 10px;
         }
-
     </style>
 </head>
-
 <body>
 <div layout:fragment="content">
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container-fluid py-0">
-            <div class="row g-0">
-                <div class="col-lg-6 d-flex align-items-center justify-content-center hero-text">
-                    <div>
-                        <h1>Your Pet's Health is Our Priority</h1>
-                        <p>Providing exceptional care and treatment for your beloved pets.</p>
-                        <a href="/appointments" class="btn btn-custom btn-lg mt-4">Book an Appointment</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 hero-image">
-                    <img src="/assets/images/image02.jpg" alt="VetImage" class="img-fluid">
-                </div>
-            </div>
+        <div class="hero-text">
+            <h1>For Pets Who Steal Hearts and Snacks</h1>
+            <p>Making vet care as kind, compassionate, and stress-free as possible for your best friend.</p>
+            <a href="/appointments" class="btn">Book an Appointment</a>
+        </div>
+        <div class="hero-image">
+            <img src="/assets/images/homePage.png" alt="VetImage">
         </div>
     </section>
 
     <!-- Services Section -->
-    <div class="container text-center my-2">
-        <h2 class="mt-4">Our Services</h2><br>
-
-        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <!-- First Carousel Item -->
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service01.jpg" class="card-img-top" alt="Find a clinic">
-                                <div class="card-body">
-                                    <h5 class="card-title">Find a clinic</h5>
-                                    <p class="card-text">We could be just next door!</p>
-                                    <a href="/clinics" class="btn card-button">More Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service02.jpg" class="card-img-top" alt="Appointment Booking">
-                                <div class="card-body">
-                                    <h5 class="card-title">Appointment Booking</h5>
-                                    <p class="card-text">Secure a spot!</p>
-                                    <a href="/appointments" class="btn card-button">Book Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service03.jpg" class="card-img-top" alt="Medical Record">
-                                <div class="card-body">
-                                    <h5 class="card-title">Medical Record</h5>
-                                    <p class="card-text">Keep track of your pet's health with us</p>
-                                    <a href="/access-medical-records" class="btn card-button">Find out more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <!-- First Carousel Item -->
+            <div class="carousel-item">
+                <div class="card">
+                    <img src="/assets/images/service01.jpg" alt="Find a clinic">
+                    <h5>Find a Clinic</h5>
+                    <p>We could be just next door!</p>
+                    <a href="/clinics" class="card-button">More Details</a>
                 </div>
-
-                <!-- Second Carousel Item -->
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service04.jpg" class="card-img-top" alt="Find a clinic 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Prescription Management</h5>
-                                    <p class="card-text">Request prescription refill </p>
-                                    <a href="/prescription/order" class="btn card-button">Manage Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service05.jpg" class="card-img-top" alt="Find a clinic 2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Profile Management</h5>
-                                    <p class="card-text">Update your details anytime</p>
-                                    <a href="/account" class="btn card-button">Edit Profile</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="width: 18rem; margin: 10px 10px 10px">
-                                <img src="/assets/images/service06.jpg" class="card-img-top" alt="Find a clinic 3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Resources</h5>
-                                    <p class="card-text">Access to your pet care and wellness!</p>
-                                    <a href="/resources" class="btn card-button">Explore</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card">
+                    <img src="/assets/images/service02.jpg" alt="Appointment Booking">
+                    <h5>Appointment Booking</h5>
+                    <p>Secure a spot!</p>
+                    <a href="/appointments" class="card-button">Book Now</a>
+                </div>
+                <div class="card">
+                    <img src="/assets/images/service03.jpg" alt="Medical Record">
+                    <h5>Medical Record</h5>
+                    <p>Keep track of your pet's health with us.</p>
+                    <a href="/access-medical-records" class="card-button">Find out more</a>
                 </div>
             </div>
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
+
+        <!-- Carousel Controls -->
+        <span class="carousel-control carousel-control-prev">&lt;</span>
+        <span class="carousel-control carousel-control-next">&gt;</span>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselInner = document.querySelector('.carousel-inner');
+        const items = carouselInner.children;
+        const prevButton = document.querySelector('.carousel-control-prev');
+        const nextButton = document.querySelector('.carousel-control-next');
+        let currentIndex = 0;
+
+        const updateCarousel = () => {
+            const offset = currentIndex * -100;
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        };
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+            updateCarousel();
+        });
+    });
+</script>
 </body>
 </html>
