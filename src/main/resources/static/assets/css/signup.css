@@ -1,0 +1,250 @@
+/*=========================*/
+/*        Variables        */
+/*=========================*/
+:root {
+    --border-radius: 10px;
+    --border-width: 5px;
+    --primary-color: #388087;       /* Teal */
+    --secondary-color: #badfe7;     /* Light blue */
+    --background-color: #ebf2eb;    /* Light greenish */
+    --text-color: #222222;          /* Dark gray */
+    --highlight-color: #277173;     /* Slightly darker shade of primary color */
+    --alert-color: #f8d7da;         /* Default alert background color */
+    --alert-text-color: #721c24;    /* Default alert text color */
+    --hover-color: #28a745;         /* Green color for hover */
+}
+
+/*=========================*/
+/*      Reset Styles       */
+/*=========================*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*=========================*/
+/*       Body Styles       */
+/*=========================*/
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+/*=========================*/
+/*     Login Page Wrapper  */
+/*=========================*/
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/*=========================*/
+/*      Rainbow Styles     */
+/*=========================*/
+.rainbow {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+    margin: auto;
+}
+
+.rainbow-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius);
+    background: linear-gradient(45deg, var(--primary-color), #f9f7f3, #ffffff, var(--primary-color));
+    background-size: 200% 200%;
+    animation: gradient-rotation 8s linear infinite;
+    z-index: -1;
+}
+
+@keyframes gradient-rotation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.rainbow-content {
+    position: relative;
+    background: white;
+    border-radius: calc(var(--border-radius) - var(--border-width));
+    margin: var(--border-width);
+    padding: 20px;
+    z-index: 1;
+}
+
+/*=========================*/
+/*        Header Styles    */
+/*=========================*/
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+/*=========================*/
+/*        Form Styles      */
+/*=========================*/
+.form-container {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(56, 128, 135, 0.5);
+}
+
+.form-control:hover {
+    box-shadow: 0px 5px 10px rgba(56, 128, 135, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+/*=========================*/
+/*      Button Styles      */
+/*=========================*/
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0px 5px 10px rgba(40, 167, 69, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Back to Home Button */
+.btn-common {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    margin: 20px auto;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-common:hover {
+    background-color: var(--highlight-color);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Center the back to home button */
+.text-center {
+    text-align: center;
+}
+
+/*=========================*/
+/*       Media Queries     */
+/*=========================*/
+@media (max-width: 576px) {
+    .rainbow-content {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .btn-primary {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+/*=========================*/
+/*        Footer Styles    */
+/*=========================*/
+footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/*=========================*/
+/*       Navbar Styles     */
+/*=========================*/
+.navbar-custom {
+    background-color: var(--primary-color);
+    margin-bottom: 0;
+}
+
+.navbar-brand {
+    font-family: 'Sergio Trendy', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}

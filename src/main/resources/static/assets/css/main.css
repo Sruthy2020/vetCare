@@ -1,0 +1,346 @@
+@font-face {
+    font-family: "Sergio Trendy";
+    src: url("Sergio Trendy.ttf");
+}
+/* GENERAL STYLING */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #f9f7f3;
+    background-color: #f9f9f9;
+    font-family: 'Poppins', serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h1,h2,h3 {
+    color: #222222;
+    font-family: 'Sergio Trendy',serif;
+}
+p {
+    font-size: 1.25rem;
+}
+
+/* NAVBAR */
+.navbar-custom {
+    background-color: #388087;
+    margin-bottom: 0;
+}
+.navbar-brand {
+    font-family: 'Sergio Trendy', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+.navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #badfe7;
+    text-decoration: underline;
+}
+
+/* HERO SECTION */
+.hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222222;
+    background-color: #ebf2eb;
+    margin-top: 0;
+}
+
+.hero-text {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-family: 'Poppins', serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #222222;
+    margin: 0;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-custom {
+    background-color: #388087;
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #bccce1;
+}
+
+.hero-image {
+    background-size: cover;
+    height: 100%;
+}
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SERVICES */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.2rem;
+}
+
+.card-body {
+    /*flex-grow: 1;*/
+    background-color:#ebf2eb ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card img {
+    height: auto;
+    max-height: 250px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-button{
+    background-color: #388087;
+    font-size: 20px;
+    color: white;
+    border: none;
+}
+
+.card-button:hover{
+    background-color: #bccce1;
+}
+
+/* NOTIFICATION*/
+.unread-notification {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    z-index: 10;
+}
+
+.notification-ui_icon {
+    position: relative;
+    font-size: 1.5rem;
+}
+
+/*BOOK APPOINTMENT FLOATING BUTTONS*/
+.book-appointment-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    color: #388087;
+    border: 2px solid #388087;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 02px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.book-appointment-btn i {
+    margin-right: 8px;
+    font-size: 26px;
+}
+
+.book-appointment-btn:hover {
+    background-color: #388087;
+    color: white;
+    border-color: #aaa;
+    text-decoration: none;
+}
+
+.book-appointment-btn:active {
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+/* FOOTER */
+.footer-style {
+    background-color: #388087;
+    color: #f9f7f3;
+    margin-top: auto;
+}
+
+#content {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.footer-style p {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #f9f7f3;
+}
+
+.footer-style a {
+    color: #f9f7f3;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+.footer-style a:hover {
+    color: #b8c5cd;
+}
+
+.footer-style .social-icon {
+    font-weight: bold;
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+    .hero-text{
+        font-size: 1rem;
+    }
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    .footer-style .row {
+        text-align: center;
+    }
+}
+
+/* Global Variables */
+:root {
+  --color-first: #65587f;
+  --color-second: #f18867;
+  --color-third: #e85f99;
+  --color-forth: #50bda1;
+  --block-width: 300px;
+  --block-height: 270px;
+  --border-width: .625rem;
+  --border-radius-outer: 8px;
+  --border-radius-inner: calc(var(--border-radius-outer) / 2);
+  --font-plain: 'IBM Plex Sans', sans-serif;
+  --font-special: 'Fredoka One', sans-serif;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#login-page {
+  background: hsl(0, 0%, 95%);
+  color: #5e5e5e;
+  font-family: var(--font-plain);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-page .container {
+  width: var(--block-width);
+  height: var(--block-height);
+  background-color: #388087;
+  box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
+  border-radius: var(--border-radius-outer);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#login-page .form-container {
+  width: calc(100% - var(--border-width));
+  padding: 1.2rem 1rem 1.8rem;
+  background: white;
+  border-radius: var(--border-radius-inner);
+}
+
+/* Form Elements */
+#login-page input {
+  font-family: inherit;
+  color: inherit;
+  outline: none;
+  font-size: 93%;
+  transition: all 300ms ease;
+}
+
+#login-page input[type="submit"] {
+  background: var(--color-third);
+  border-color: var(--color-third);
+  color: #fff;
+  font-family: var(--font-special);
+}
+
+#login-page input[type="submit"]:active {
+  transform: scale(0.97);
+}
+
+#login-page h3 {
+  margin: 0;
+  font-family: var(--font-special);
+  line-height: 1.4;
+}
+
+/* Accent Animation */
+#login-page .rainbow {
+  width: 100%;
+  height: 100%;
+  animation: o-rotate-360 linear 8s infinite;
+}
+
+@keyframes o-rotate-360 {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Form Focus */
+#login-page .c-form--accent input:hover,
+#login-page .c-form--accent input:focus {
+  border-color: var(--color-third);
+  box-shadow: 0 0 0 3px hsla(335, 75%, 64%, 0.25);
+}

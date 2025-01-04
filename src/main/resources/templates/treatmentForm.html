@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Treatment Plan</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/medicalRecord2.css}">
+</head>
+<body>
+<!-- Main Container -->
+<div class="TP-container">
+    <!-- Page Title -->
+    <h2 class="TP-title">Update Treatment Plan</h2>
+
+    <!-- Error Message Display -->
+    <div class="TP-alert-danger" th:if="${errorMessage != null}">
+        <div class="TP-alert-content">
+            <span class="TP-icon">⚠️</span>
+            <p th:text="${errorMessage}"></p>
+        </div>
+    </div>
+
+    <!-- Step 1: Select a User -->
+    <form th:action="@{/treatment/selectUser}" method="get">
+        <div class="TP-mb-3">
+            <label for="TP-userSelect" class="TP-form-label">Select a User:</label>
+            <select class="TP-form-select" id="TP-userSelect" name="userId" onchange="this.form.submit()" required>
+                <option value="" disabled selected>Select a User</option>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"
+                        th:selected="${selectedUser != null && selectedUser.id == user.id}"></option>
+            </select>
+        </div>
+    </form>
+
+    <!-- Step 2: Select a Pet -->
+    <form th:if="${pets != null}" th:action="@{/treatment/selectPet}" method="get">
+        <div class="TP-mb-3">
+            <label for="TP-petSelect" class="TP-form-label">Select a Pet:</label>
+            <select class="TP-form-select" id="TP-petSelect" name="petId" onchange="this.form.submit()" required>
+                <option value="" disabled selected>Select a Pet</option>
+                <option th:each="pet : ${pets}" th:value="${pet.petID}" th:text="${pet.name}"
+                        th:selected="${selectedPet != null && selectedPet.petID == pet.petID}"></option>
+            </select>
+        </div>
+    </form>
+
+    <!-- Treatment Plan Form -->
+    <form th:if="${selectedPet != null}" th:action="@{/save-treatment-plan}" method="post" th:object="${treatmentPlan}" onsubmit="saveOnSubmit()">
+        <input type="hidden" name="petId" th:value="${selectedPet.petID}" />
+        <div class="TP-card TP-mt-4">
+            <div class="TP-card-body">
+                <h3 class="TP-form-title">Treatment Plan Details for <span th:text="${selectedPet.name}"></span></h3>
+
+                <!-- Diagnosis (Required) -->
+                <div class="TP-mb-3">
+                    <label for="TP-diagnosis" class="TP-form-label">Diagnosis:</label>
+                    <input type="text" class="TP-form-control" id="TP-diagnosis" th:field="*{diagnosis}" placeholder="Enter diagnosis" minlength="3" required>
+                    <div class="invalid-feedback">Diagnosis must be at least 3 characters long.</div>
+                </div>
+
+                <!-- Treatment Type -->
+                <div class="TP-mb-3">
+                    <label for="TP-treatmentType" class="TP-form-label">Treatment Type:</label>
+                    <input type="text" class="TP-form-control" id="TP-treatmentType" th:field="*{treatmentType}" placeholder="Enter treatment type">
+                </div>
+
+                <!-- Treatment Description -->
+                <div class="TP-mb-3">
+                    <label for="TP-treatmentDescription" class="TP-form-label">Treatment Description:</label>
+                    <input type="text" class="TP-form-control" id="TP-treatmentDescription" th:field="*{treatmentDescription}" placeholder="Enter treatment description" required>
+                </div>
+
+                <!-- Pet Condition -->
+                <div class="TP-mb-3">
+                    <label for="TP-petCondition" class="TP-form-label">Pet Condition:</label>
+                    <input type="text" class="TP-form-control" id="TP-petCondition" th:field="*{petCondition}" placeholder="Enter pet condition">
+                </div>
+
+                <!-- Emergency Status -->
+                <div class="TP-mb-3 form-check">
+                    <input type="checkbox" class="TP-form-check-input" id="TP-isEmergency" th:field="*{isEmergency}">
+                    <label for="TP-isEmergency" class="TP-form-check-label">Is Emergency?</label>
+                </div>
+
+                <!-- Start Date (Required) -->
+                <div class="TP-mb-3">
+                    <label for="TP-startDate" class="TP-form-label">Start Date:</label>
+                    <input type="date" class="TP-form-control" id="TP-startDate" th:field="*{startDate}" required>
+                    <div class="invalid-feedback">Start Date is required.</div>
+                </div>
+
+                <!-- End Date (Must be after Start Date) -->
+                <div class="TP-mb-3">
+                    <label for="TP-endDate" class="TP-form-label">End Date:</label>
+                    <input type="date" class="TP-form-control" id="TP-endDate" th:field="*{endDate}">
+                    <div class="invalid-feedback">End Date must be after the Start Date.</div>
+                </div>
+
+                <!-- Prescribed Medications -->
+                <div class="TP-mb-3">
+                    <label for="TP-prescribedMedications" class="TP-form-label">Prescribed Medications:</label>
+                    <input type="text" class="TP-form-control" id="TP-prescribedMedications" th:field="*{prescribedMedications}" placeholder="Enter prescribed medications">
+                </div>
+
+                <!-- Treatment Duration -->
+                <div class="TP-mb-3">
+                    <label for="TP-treatmentDuration" class="TP-form-label">Treatment Duration:</label>
+                    <input type="text" class="TP-form-control" id="TP-treatmentDuration" th:field="*{treatmentDuration}" placeholder="Enter treatment duration">
+                </div>
+
+                <!-- Next Steps -->
+                <div class="TP-mb-3">
+                    <label for="TP-nextSteps" class="TP-form-label">Next Steps:</label>
+                    <input type="text" class="TP-form-control" id="TP-nextSteps" th:field="*{nextSteps}" placeholder="Enter next steps">
+                </div>
+
+                <!-- Vet Name -->
+                <div class="TP-mb-3">
+                    <label for="TP-vetName" class="TP-form-label">Vet Name:</label>
+                    <input type="text" class="TP-form-control" id="TP-vetName" th:field="*{vetName}" placeholder="Enter vet name">
+                </div>
+
+                <!-- Follow-Up Date -->
+                <div class="TP-mb-3">
+                    <label for="TP-followUpDate" class="TP-form-label">Follow-Up Date:</label>
+                    <input type="date" class="TP-form-control" id="TP-followUpDate" th:field="*{followUpDate}">
+                </div>
+
+                <!-- Cost Estimate (Must be positive number) -->
+                <div class="TP-mb-3">
+                    <label for="TP-costEstimate" class="TP-form-label">Cost Estimate:</label>
+                    <input type="number" class="TP-form-control" id="TP-costEstimate" th:field="*{costEstimate}" placeholder="Enter cost estimate" min="0" step="1" required>
+                    <div class="invalid-feedback">Cost Estimate must be a positive number.</div>
+                </div>
+
+                <!-- Treatment Outcome -->
+                <div class="TP-mb-3">
+                    <label for="TP-treatmentOutcome" class="TP-form-label">Treatment Outcome:</label>
+                    <input type="text" class="TP-form-control" id="TP-treatmentOutcome" th:field="*{treatmentOutcome}" placeholder="Enter treatment outcome">
+                </div>
+
+                <!-- Treatment Notes -->
+                <div class="TP-mb-3">
+                    <label for="TP-treatmentNotes" class="TP-form-label">Treatment Notes:</label>
+                    <textarea class="TP-form-control" id="TP-treatmentNotes" th:field="*{treatmentNotes}" placeholder="Enter treatment notes"></textarea>
+                </div>
+
+                <!-- Clinic Location -->
+                <div class="TP-mb-3">
+                    <label for="TP-clinicLocation" class="TP-form-label">Clinic Location:</label>
+                    <input type="text" class="TP-form-control" id="TP-clinicLocation" th:field="*{clinicLocation}" placeholder="Enter clinic location">
+                </div>
+
+                <!-- Is Insured -->
+                <div class="TP-mb-3 form-check">
+                    <input type="checkbox" class="TP-form-check-input" id="TP-isInsured" th:field="*{isInsured}">
+                    <label for="TP-isInsured" class="TP-form-check-label">Is Insured?</label>
+                </div>
+
+                <!-- Insurance Details -->
+                <div class="TP-mb-3">
+                    <label for="TP-insuranceDetails" class="TP-form-label">Insurance Details:</label>
+                    <input type="text" class="TP-form-control" id="TP-insuranceDetails" th:field="*{insuranceDetails}" placeholder="Enter insurance details">
+                </div>
+
+                <!-- Payment Status -->
+                <div class="TP-mb-3">
+                    <label for="TP-paymentStatus" class="TP-form-label">Payment Status:</label>
+                    <input type="text" class="TP-form-control" id="TP-paymentStatus" th:field="*{paymentStatus}" placeholder="Enter payment status">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="TP-d-grid">
+                    <button type="submit" class="TP-btn-primary">Save Treatment Plan</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Go Back Button -->
+    <div class="TP-d-grid TP-mt-4">
+        <a th:href="@{/}" class="TP-btn-back">Go Back</a>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    window.addEventListener('load', function() {
+        const successMessage = /*[[${successMessage != null ? successMessage : 'null'}]]*/ 'null';
+        if (successMessage !== 'null') {
+            alert(successMessage);
+        }
+
+        const errorMessage = /*[[${errorMessage != null ? errorMessage : 'null'}]]*/ 'null';
+        if (errorMessage !== 'null') {
+            alert(errorMessage);
+        }
+    });
+
+    document.getElementById('TP-startDate').addEventListener('change', function () {
+        const startDate = this.value;
+        const endDateInput = document.getElementById('TP-endDate');
+        endDateInput.min = startDate;
+    });
+
+    document.getElementById('TP-endDate').addEventListener('change', function () {
+        const startDate = document.getElementById('TP-startDate').value;
+        const endDate = this.value;
+        if (endDate <= startDate) {
+            alert('End Date must be after the Start Date.');
+            this.value = '';
+        }
+    });
+
+    const costEstimateInput = document.getElementById('TP-costEstimate');
+    costEstimateInput.addEventListener('input', function () {
+        if (this.value < 0) {
+            this.setCustomValidity('Cost estimate must be a positive number.');
+            this.reportValidity();
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    function saveOnSubmit() {
+        alert("Saved Treatment Plan successfully!");
+        location.reload();
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/assets/css/dashboard.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<!--<a href="/account">Dashboard</a>-->
+
+
+<div layout:fragment="content">
+
+    <div class="d-flex min-vh-100">
+        <!-- Sidebar -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 380px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <h1 class="navbar-brand">Vet Care</h1>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto custom-sidebar">
+                <li class="nav-item">
+                    <a href="/account" class="nav-link userDashboard" aria-current="page">
+                        <i class="bi bi-house-door"></i>
+                        User Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/appointment-management" class="nav-link text-white">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        Appointment Management
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/prescription-management" class="nav-link text-white">
+                        <i class="bi bi-file-earmark-medical me-2"></i>
+                        Prescription Management
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/pet-management" class="nav-link text-white">
+                        <i class="bi bi-heart me-2"></i>
+                        Pet Management
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown mt-auto">
+                <!-- Dropdown toggle button with user name -->
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong th:text="${loggedInUser.name}">User Name</strong>
+                </a>
+
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                    <li><hr class="dropdown-divider"></li>
+                    <li th:if="${loggedInUser != null}">
+                        <form th:action="@{/logout}" method="post" style="display: inline;">
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content on the right -->
+        <div class="flex-grow-1 dashboard-content">
+            <div class="container py-5">
+
+                <!--                Breadcrumb for dashboard-->
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4 fs-5">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item" th:if="${loggedInUser != null}"><a href="/account">User</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h2 class="p-4 mb-4 border-top border-bottom"
+                                    style="background-color: #061945;color: #ffffff">Account Information</h2>
+
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0 fw-bold">Name</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" th:text="${user.name}"></p>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0 fw-bold">Email</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" th:text="${user.email}"></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0 fw-bold">Phone</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" th:text="${user.phoneNumber}"></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0 fw-bold">Address</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" th:text="${user.address}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Buttons-->
+                        <div class="d-flex justify-content-center mb-2 gap-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editProfileModal">
+                                Edit Profile
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteProfileModal">
+                                Delete Profile
+                            </button>
+<!--                            <button class="btn btn-primary" id="add-pet-button" data-bs-toggle="modal"-->
+<!--                                    data-bs-target="#addPetModal">Add New Pet-->
+<!--                            </button>-->
+                        </div>
+<!--                        &lt;!&ndash; Modal for Add New Pet &ndash;&gt;-->
+<!--                        <div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addPetModalLabel"-->
+<!--                             aria-hidden="true">-->
+<!--                            <div class="modal-dialog">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                        <h5 class="modal-title" id="addPetModalLabel">Add New Pet</h5>-->
+<!--                                        <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                                                aria-label="Close"></button>-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-body">-->
+<!--                                        <form th:action="@{/account/pet-register}" method="post" id="add-pet-form">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petName">Pet Name:</label>-->
+<!--                                                <input type="text" class="form-control" id="petName" name="name"-->
+<!--                                                       placeholder="Enter pet name" required>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petAge">Pet Age:</label>-->
+<!--                                                <input type="number" class="form-control" id="petAge" name="age"-->
+<!--                                                       placeholder="Enter pet age" required>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petGender">Pet Gender:</label>-->
+<!--                                                <select class="form-control" id="petGender" name="gender" required>-->
+<!--                                                    <option value="Male">Male</option>-->
+<!--                                                    <option value="Female">Female</option>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petWeight">Pet Weight:</label>-->
+<!--                                                <input type="number" class="form-control" id="petWeight" name="weight"-->
+<!--                                                       placeholder="Enter pet weight" required>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petBreed">Pet Breed:</label>-->
+<!--                                                <input type="text" class="form-control" id="petBreed" name="breed"-->
+<!--                                                       placeholder="Enter pet breed" required>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="petBirthDate">Birth Date:</label>-->
+<!--                                                <input type="date" class="form-control" id="petBirthDate"-->
+<!--                                                       name="birthDate" required>-->
+<!--                                            </div>-->
+<!--                                            <button type="submit" class="btn btn-primary mt-3">Submit</button>-->
+<!--                                        </form>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <!-- Edit Profile Modal -->
+                        <div class="modal fade" id="editProfileModal" tabindex="-1"
+                             aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/account/edit}" method="post">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                       th:value="${user.name}" required pattern="(Dr\.\s*)?[a-zA-Z\s]+" title="Name should only contain letters.">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                       th:value="${user.email}" >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="password"
+                                                       name="password" th:value="${user.password}" required minlength="6">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone</label>
+                                                <input type="text" class="form-control" id="phone" name="phoneNumber"
+                                                       th:value="${user.phoneNumber}" required pattern="\d+" title="Phone number must be in digits.">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address"
+                                                       th:value="${user.address}"  >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="userType" class="form-label">User Type</label>
+                                                <select class="form-control" id="userType" name="userType" required disabled>
+                                                    <option value="User" th:selected="${user.userType == 'User'}">User</option>
+                                                    <option value="Vet" th:selected="${user.userType == 'Vet'}">Vet</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Delete Confirmation Modal -->
+                        <div class="modal fade" id="deleteProfileModal" tabindex="-1"
+                             aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteProfileModalLabel">Confirm Deletion</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete your profile?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                                        </button>
+                                        <form th:action="@{/account/delete}" method="post" id="deleteProfileForm">
+                                            <button type="submit" class="btn btn-danger">Delete Profile</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Include Bootstrap 5.3.3 JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
