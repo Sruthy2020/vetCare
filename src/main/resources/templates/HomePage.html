@@ -22,41 +22,93 @@
             height: auto;
         }
 
-        /* Hero Section */
-        .hero-section {
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center the content horizontally */
+        /* Welcome Page Section */
+        .welcome-page {
             height: 100vh; /* Full viewport height */
-            width: 100vw; /* Full viewport width */
-            background-image: url('/static/assets/images/homePage.png'); /* Replace with your actual image path */
-            background-size: cover; /* Scale the image to cover the entire section */
-            background-repeat: no-repeat; /* Prevent repeating */
-            background-position: center; /* Center the image */
-            position: relative; /* Position relative for inner content */
-            z-index: 1;
-            overflow: hidden; /* Prevent any overflow */
-        }
-
-        /* Hero Text */
-        .hero-text {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: 50%; /* Center horizontally */
-            transform: translate(-50%, -50%); /* Adjust for perfect centering */
-            z-index: 2;
+            background: url('/assets/images/homePage1.png') center/cover no-repeat,
+            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Background with overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #fff;
             text-align: center;
-            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4); /* Add shadow for readability */
-            max-width: 80%;
+            position: relative;
         }
+
+        .overlay {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .welcome-text {
+            font-size: 3.5em;
+            color: #ffffff; /* Bright white */
+            text-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333, 0 0 20px #ff3333, 0 0 30px #ff3333, 0 0 40px #ff3333;
+            margin-bottom: 20px;
+            animation: glow 1.5s infinite alternate;
+            transition: text-shadow 0.3s ease, color 0.3s ease; /* Smooth transition */
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 2px #a7d4e7, 0 0 4px #41daff, 0 0 6px #3e99f8, 0 0 8px #34219f;
+            }
+            to {
+                text-shadow: 0 0 2px #34219f, 0 0 4px #3e99f8, 0 0 6px #41daff, 0 0 8px #a7d4e7;
+            }
+        }
+
+        /* Hover Effect */
+        .welcome-text:hover {
+            text-shadow: 0 0 2px #41daff, 0 0 4px #3e99f8, 0 0 6px #34219f, 0 0 8px #a7d4e7;
+            color: #002550FF;
+            animation: none;
+        }
+
+
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #ffffff; /* Soft white */
+            margin-bottom: 30px;
+            text-shadow: 0 0 2px #a7d4e7, 0 0 4px #41daff, 0 0 6px #3e99f8, 0 0 8px #34219f;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .subtitle:hover {
+            text-shadow: 0 0 2px #41daff, 0 0 4px #3e99f8, 0 0 6px #34219f, 0 0 8px #a7d4e7;
+            color: #002550FF;
+            animation: none;
+        }
+
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(0, 100, 255, 0.5); /* Dark red */
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 30px;
+            border: 2px solid rgba(0, 102, 255, 0.5); /* Maroon border */
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #002550; /* Bright red */
+            color: #fff;
+            border-color: #002550;
+        }
+
 
         /* Full Page Reset */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
         }
 
 
@@ -182,14 +234,13 @@
 <body>
 <div layout:fragment="content">
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-text">
-            <h1>For Pets Who Steal Hearts and Snacks</h1>
-            <p>Making vet care as kind, compassionate, and stress-free as possible for your best friend.</p>
-            <a href="/appointments" class="btn">Book an Appointment</a>
-        </div>
-        <div class="hero-image">
-            <img src="/assets/images/homePage.png" alt="VetImage">
+    <section class="hero">
+        <div class="welcome-page">
+            <div class="overlay">
+                <h1 class="welcome-text">For Pets Who Steal Hearts and Snacks</h1>
+                <p class="subtitle">Making vet care as kind, compassionate, and stress-free as possible for your best friend.</p>
+                <a href="/appointments" class="button">Book an Appointment</a>
+            </div>
         </div>
     </section>
 
