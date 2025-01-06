@@ -13,24 +13,24 @@
     <style>
         /* Global Button-Like Link Styles */
         a {
-            text-decoration: none; /* Remove underline */
-            color: #ffffff; /* White text */
+            text-decoration: none;
+            color: #ffffff;
             font-family: 'Sergio Trendy', serif;
-            background-color: #009bff; /* Blue background */
-            padding: 5px 10px; /* Padding for button-like appearance */
-            border-radius: 5px; /* Rounded corners */
-            display: inline-block; /* Ensure proper button sizing */
-            font-weight: 400; /* Bold text */
-            border: solid rgba(0, 102, 255, 0.5); /* Maroon border */
-            transition: all 0.3s ease; /* Smooth transitions */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
+            background-color: #009bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: 400;
+            border: solid rgba(0, 102, 255, 0.5);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         a:hover {
-            color: #ffffff; /* Keep text white */
-            font-weight: 800; /* Bold text */
-            transform: translateY(-2px); /* Slight lift effect */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
+            color: #ffffff;
+            font-weight: 800;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
 
@@ -40,23 +40,22 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.5rem 1rem;
-            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7)); /* Transparent gradient */
-            color: #ffffff; /* White text */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7));
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
             max-height: 100px;
-            max-width: 1500px; /* Maximum width */
-            margin: 0 auto; /* Center alignment */
-            transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-            backdrop-filter: blur(5px); /* Optional: Adds a blur effect to the background */
+            max-width: 1500px;
+            margin: 0 auto;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Hover Effect on Navbar */
         .navbar:hover {
-            background: linear-gradient(90deg, rgba(0, 37, 80, 0.85), rgba(62, 153, 248, 0.85)); /* Less transparent on hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+            background: linear-gradient(90deg, rgba(0, 37, 80, 0.85), rgba(62, 153, 248, 0.85));
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
         .navbar-logo {
@@ -74,25 +73,25 @@
         .navbar-links {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             margin: 0;
             padding: 0;
         }
 
         .navbar-links a {
             text-decoration: none;
-            color: #ffffff; /* White links */
+            color: #ffffff;
             font-weight: 600;
             font-size: 1.0em;
             transition: color 0.3s ease;
         }
 
         .navbar-links a:hover {
-            color: #009bff; /* Light blue hover effect */
+            color: #009bff;
         }
 
         .navbar-toggle {
-            display: none; /* Hidden on larger screens */
+            display: none;
             flex-direction: column;
             cursor: pointer;
         }
@@ -108,7 +107,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar-links {
-                display: none; /* Hidden by default on smaller screens */
+                display: none;
                 flex-direction: column;
                 gap: 1rem;
                 position: absolute;
@@ -121,56 +120,108 @@
             }
 
             .navbar-links.active {
-                display: flex; /* Shown when toggle is clicked */
+                display: flex;
             }
 
             .navbar-toggle {
-                display: flex; /* Show toggle button on smaller screens */
+                display: flex;
             }
         }
+
+        /* Dropdown Button Styles */
+        .nav-item .dropdown-toggle {
+            color: #ffffff;
+            background-color: transparent;
+            font-weight: bold;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item .dropdown-toggle:hover {
+            background-color: rgba(0, 155, 255, 0.7);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown-menu {
+            background: linear-gradient(90deg, #0041e4, #009bff);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+            padding: 10px 0;
+        }
+
+        /* Dropdown Item Styles */
+        .dropdown-menu .dropdown-item {
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 1em;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                background: rgba(0, 65, 228, 0.9);
+            }
+
+            .dropdown-menu .dropdown-item {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+        }
+
 
         /* Book Appointment Floating Button */
         .book-appointment-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(90deg, rgba(0, 65, 228, 0.8), rgba(0, 155, 255, 0.8)); /* Semi-transparent gradient */
-            color: #ffffff; /* White text */
+            background: linear-gradient(90deg, rgba(0, 65, 228, 0.8), rgba(0, 155, 255, 0.8));
+            color: #ffffff;
             border-radius: 50px;
-            padding: 15px 30px; /* Larger padding for a more prominent button */
+            padding: 15px 30px;
             font-size: 1.2em;
-            font-weight: bold; /* Bold text */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Glowing text */
-            box-shadow: 0 4px 15px rgba(0, 155, 255, 0.5); /* Glowing box shadow */
-            text-decoration: none; /* No underline */
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 155, 255, 0.5);
+            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Smooth transition */
-            cursor: pointer; /* Show pointer cursor */
-            animation: float 3s infinite ease-in-out, glow 1.5s infinite alternate; /* Add glowing animation */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+            animation: float 3s infinite ease-in-out, glow 1.5s infinite alternate;
         }
 
         /* Hover effect */
         .book-appointment-btn:hover {
-            background: linear-gradient(90deg, rgba(0, 155, 255, 0.9), rgba(0, 65, 228, 0.9)); /* Slightly less transparent gradient */
-            transform: translateY(-5px); /* Slight lift on hover */
-            box-shadow: 0 8px 20px rgba(0, 155, 255, 0.6), 0 0 15px rgba(0, 155, 255, 0.6); /* Enhanced glowing effect */
+            background: linear-gradient(90deg, rgba(0, 155, 255, 0.9), rgba(0, 65, 228, 0.9));
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 155, 255, 0.6), 0 0 15px rgba(0, 155, 255, 0.6);
         }
 
-        /* Active (click) effect */
         .book-appointment-btn:active {
-            transform: translateY(2px); /* Slight compression on click */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Reduced shadow */
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Optional: Floating animation for attention */
         @keyframes float {
             0%, 100% {
-                transform: translateY(0); /* Starting position */
+                transform: translateY(0);
             }
             50% {
-                transform: translateY(-8px); /* Float up */
+                transform: translateY(-8px);
             }
         }
 
@@ -189,8 +240,8 @@
 
         /* Footer Styles */
         .footer {
-            background: linear-gradient(to bottom, #0041e4, #002550); /* Blue gradient */
-            color: #ffffff; /* White text */
+            background: linear-gradient(to bottom, #0041e4, #002550);
+            color: #ffffff;
             padding: 40px 20px;
             text-align: center;
             position: relative;
@@ -219,24 +270,24 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
             text-transform: uppercase;
-            color: #a7d4e7; /* Light blue */
+            color: #a7d4e7;
         }
 
         .footer-column p {
             font-size: 1rem;
             margin-bottom: 10px;
-            color: #f0f0f0; /* Light white */
+            color: #f0f0f0;
         }
 
         .footer-link {
-            color: #60c6ff; /* Light blue link */
+            color: #60c6ff;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         .footer-link:hover {
-            color: #009bff; /* Bright blue hover */
+            color: #009bff;
         }
 
         .social-icons {
@@ -247,22 +298,22 @@
         }
 
         .social-icon {
-            color: #ffffff; /* White icons */
+            color: #ffffff;
             font-size: 1.5rem;
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .social-icon:hover {
-            color: #60c6ff; /* Light blue on hover */
-            transform: scale(1.2); /* Slight zoom */
+            color: #60c6ff;
+            transform: scale(1.2);
         }
 
         .footer-bottom {
             margin-top: 20px;
-            border-top: 1px solid #60c6ff; /* Subtle divider */
+            border-top: 1px solid #60c6ff;
             padding-top: 10px;
             font-size: 0.9rem;
-            color: #a7d4e7; /* Subtle light blue */
+            color: #a7d4e7;
         }
 
     </style>
@@ -291,10 +342,10 @@
                     <a class="nav-link" href="/resources">Resources</a>
                 </li>
                 <!-- Conditional rendering based on userType and loggedInUser -->
-                <li class="nav-item dropdown" th:if="${loggedInUser != null && userType == 'User'}">
-                    <button class="nav-link dropdown-toggle" id="dropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item" th:if="${loggedInUser != null && userType == 'User'}">
+                    <a class="nav-link" id="dropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Medical Access
-                    </button>
+                    </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="/access-medical-records">Access Medical Record</a></li>
                         <li><a class="dropdown-item" href="/view-vaccination-records">View Vaccination Records</a></li>
@@ -318,8 +369,8 @@
                     <a class="nav-link" href="/account">Dashboard</a>
                 </li>
                 <li class="nav-item" th:if="${loggedInUser != null}">
-                    <form th:action="@{/logout}" method="post" style="display: inline;">
-                        <button type="submit" class="nav-link btn btn-link">Logout</button>
+                    <form th:action="@{/logout}" method="post" class="nav-item">
+                        <a class="nav-link" type="submit" >Logout</a>
                     </form>
                 </li>
                 <li class="nav-item dropdown notification-ui" th:if="${loggedInUser != null}">
