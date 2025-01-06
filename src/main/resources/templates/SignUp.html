@@ -1,91 +1,220 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create an Account</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>VetCare Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/assets/css/signup.css}">
+        body {
+            background: url('/assets/images/login.png') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+        }
 
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for contrast */
+            z-index: 1;
+        }
+
+        .signup-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 750px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .signup-container h2 {
+            margin-bottom: 0.1rem;
+            font-size: 2.5rem;
+            color: #0041e4;
+            font-weight: bold;
+            text-shadow: 0 3px 5px rgba(0, 65, 228, 0.5); /* Subtle glow */
+        }
+
+        .signup-container p {
+            margin-bottom: 0.1rem;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 0rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: #333;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #009bff;
+            box-shadow: 0 0 5px rgba(0, 155, 255, 0.5);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #0041e4, #009bff);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #009bff, #0041e4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            margin-top: 1rem;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #28a745; /* Green for Back to Home */
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .btn-secondary:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        /* Error Message Styling */
+        .TP-alert-danger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 69, 58, 0.1); /* Light red background */
+            color: #ff453a; /* Red text color */
+            border: 1px solid #ff453a; /* Red border */
+            padding: 5px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            animation: fadeIn 0.5s ease-in-out; /* Smooth fade-in effect */
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .TP-alert-content {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between icon and text */
+        }
+
+        .TP-icon {
+            font-size: 1.5rem; /* Larger icon size */
+            flex-shrink: 0;
+        }
+
+        .TP-alert-content p {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: bold; /* Highlighted text */
+        }
+
+    </style>
 </head>
-<body onload="loginStatus()">
-
-<div layout:fragment="content">
-    <!-- Wrapper to center the content -->
-    <div class="login-page">
-        <!-- Rainbow Container -->
-        <div class="rainbow">
-            <div class="rainbow-border"></div>
-            <div class="rainbow-content">
-                <h2 class="text-center">Create an Account</h2>
-                <!-- Error Message Display -->
-                <div class="TP-alert-danger" th:if="${errorMessage != null}">
-                    <div class="TP-alert-content">
-                        <span class="TP-icon">⚠️</span>
-                        <p th:text="${errorMessage}"></p>
-                    </div>
-                </div>
-                <form th:action="@{/signup}" method="post" id="signupForm" class="form-container" >
-                    <div id="step-1" class="form-step">
-                        <!-- Name Field -->
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input name="name" type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                        </div>
-                        <!-- Email Field -->
-                        <div class="form-group">
-                            <label for="email">Email Address:</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                        </div>
-                        <!-- Password Field -->
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" required minlength="6">
-                        </div>
-                        <!-- Phone Number Field -->
-                        <div class="form-group">
-                            <label for="phoneNumber">Phone Number:</label>
-                            <input name="phoneNumber" type="number" class="form-control" id="phoneNumber" placeholder="Enter your Phone Number" required>
-                        </div>
-                        <!-- Address Field -->
-                        <div class="form-group">
-                            <label for="address">Address:</label>
-                            <input name="address" type="text" class="form-control" id="address" placeholder="Enter your address" required>
-                        </div>
-                        <!-- User Type Field -->
-                        <div class="form-group">
-                            <label for="userType">User Type:</label>
-                            <select name="userType" class="form-control" id="userType" required>
-                                <option value="User">User</option>
-                                <option value="Vet">Vet</option>
-                            </select>
-                        </div>
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                <!-- Back to Home Button -->
-                <div class="text-center">
-                    <a href="/" class="btn-common btn-back">Back to Home Page</a>
-                </div>
-            </div>
+<body>
+<div class="overlay"></div>
+<div class="signup-container">
+    <h2>Create an Account</h2>
+    <p>Fill in the details below to join VetCare</p>
+    <div class="TP-alert-danger" th:if="${errorMessage != null}">
+        <div class="TP-alert-content">
+            <span class="TP-icon">⚠️</span>
+            <p th:text="${errorMessage}"></p>
         </div>
     </div>
-
+    <form th:action="@{/signup}" method="post" id="signupForm" class="form-container" >
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required minlength="6">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" required>
+        </div>
+        <div class="form-group">
+            <label for="userType">User Type</label>
+            <select name="userType" id="userType" class="form-control" required>
+                <option value="User">User</option>
+                <option value="Vet">Vet</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary">Create Account</button>
+    </form>
+    <a href="/" class="btn-secondary">Back to Home Page</a>
 </div>
 
-<!-- External Scripts -->
-<script th:src="@{/scripts/SignUp.js}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
-<footer class="container-fluid text-center py-3">
-    <!-- Footer content if any -->
-</footer>
-
 </html>

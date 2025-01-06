@@ -1,57 +1,207 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>VetCare Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/assets/css/login.css}">
+        body {
+            background: url('/assets/images/login.png') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for contrast */
+            z-index: 1;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            color: #0041e4;
+            font-weight: bold;
+            text-shadow: 0 3px 5px rgba(0, 65, 228, 0.5); /* Subtle glow */
+        }
+
+        .login-container p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #009bff;
+            box-shadow: 0 0 5px rgba(0, 155, 255, 0.5);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #0041e4, #009bff);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #009bff, #0041e4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-link {
+            margin-top: 1rem;
+            display: inline-block;
+            color: #dc3545; /* Red for Sign Up */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-link:hover {
+            color: #a71d2a;
+            text-decoration: underline;
+            transform: scale(1.05); /* Slightly enlarge */
+        }
+
+        .btn-secondary {
+            margin-top: 1rem;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #28a745; /* Green for Go Back */
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .btn-secondary:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        /* Error Message Styling */
+        .TP-alert-danger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 69, 58, 0.1); /* Light red background */
+            color: #ff453a; /* Red text color */
+            border: 1px solid #ff453a; /* Red border */
+            padding: 5px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            animation: fadeIn 0.5s ease-in-out; /* Smooth fade-in effect */
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .TP-alert-content {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between icon and text */
+        }
+
+        .TP-icon {
+            font-size: 1.5rem; /* Larger icon size */
+            flex-shrink: 0;
+        }
+
+        .TP-alert-content p {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: bold; /* Highlighted text */
+        }
+
+    </style>
 </head>
-
 <body>
-<div class="login-page">
-    <div layout:fragment="content">
-
-
-            <div class="rainbow-content">
-                <h2 class="text-center">Login</h2>
-
-                <!-- Error Message Display -->
-                <div class="TP-alert-danger" th:if="${errorMessage != null}">
-                    <div class="TP-alert-content">
-                        <span class="TP-icon">⚠️</span>
-                        <p th:text="${errorMessage}"></p>
-                    </div>
-                </div>
-                <form th:action="@{/login}" method="post" id="loginForm" class="mx-auto form-container">
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required minlength="6">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
-                    <a href="/signup" class="btn btn-link">Don't have an account? Sign up</a>
-                    <!--                    <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>-->
-                </form>
-            </div>
-
-        <div class="text-center">
-            <a href="/" class="btn-common btn-back">Back to Home Page</a>
+<div class="overlay"></div>
+<div class="login-container">
+    <h2>Welcome Back!</h2>
+    <p>Please log in to continue</p>
+    <div class="TP-alert-danger" th:if="${errorMessage != null}">
+        <div class="TP-alert-content">
+            <span class="TP-icon">⚠️</span>
+            <p th:text="${errorMessage}"></p>
         </div>
     </div>
+
+    <form th:action="@{/login}" method="post" id="loginForm" class="mx-auto form-container">
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email Address" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-primary">Log In</button>
+    </form>
+    <a href="/signup" class="btn-link">Don't have an account? Sign up</a>
+    <a href="/" class="btn-secondary">Go Back</a>
 </div>
-<!-- Scripts placed at the end of the body -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<footer class="container-fluid text-center py-3">
-    <!-- Footer content -->
-</footer>
 </html>
