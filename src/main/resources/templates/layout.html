@@ -40,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0.5rem 1rem;
-            background: linear-gradient(90deg, #009bff, #009bff); /* Gradient background */
+            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7)); /* Transparent gradient */
             color: #ffffff; /* White text */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
             position: sticky;
@@ -50,13 +50,15 @@
             max-width: 1500px; /* Maximum width */
             margin: 0 auto; /* Center alignment */
             transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            backdrop-filter: blur(5px); /* Optional: Adds a blur effect to the background */
         }
 
         /* Hover Effect on Navbar */
         .navbar:hover {
-            background: linear-gradient(90deg, #009bff, #3e99f8); /* Reverse gradient */
+            background: linear-gradient(90deg, rgba(0, 37, 80, 0.85), rgba(62, 153, 248, 0.85)); /* Less transparent on hover */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
         }
+
         .navbar-logo {
             display: flex;
             align-items: center;
@@ -127,42 +129,142 @@
             }
         }
 
-
         /* Book Appointment Floating Button */
         .book-appointment-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #0041e4; /* Blue background */
+            background: linear-gradient(90deg, rgba(0, 65, 228, 0.8), rgba(0, 155, 255, 0.8)); /* Semi-transparent gradient */
             color: #ffffff; /* White text */
             border-radius: 50px;
-            padding: 15px 25px;
+            padding: 15px 30px; /* Larger padding for a more prominent button */
             font-size: 1.2em;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            font-weight: bold; /* Bold text */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Glowing text */
+            box-shadow: 0 4px 15px rgba(0, 155, 255, 0.5); /* Glowing box shadow */
+            text-decoration: none; /* No underline */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Smooth transition */
+            cursor: pointer; /* Show pointer cursor */
+            animation: float 3s infinite ease-in-out, glow 1.5s infinite alternate; /* Add glowing animation */
         }
 
+        /* Hover effect */
         .book-appointment-btn:hover {
-            background-color: #009bff; /* Light blue hover effect */
-            color: #ffffff;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, rgba(0, 155, 255, 0.9), rgba(0, 65, 228, 0.9)); /* Slightly less transparent gradient */
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 8px 20px rgba(0, 155, 255, 0.6), 0 0 15px rgba(0, 155, 255, 0.6); /* Enhanced glowing effect */
         }
+
+        /* Active (click) effect */
+        .book-appointment-btn:active {
+            transform: translateY(2px); /* Slight compression on click */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Reduced shadow */
+        }
+
+        /* Optional: Floating animation for attention */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0); /* Starting position */
+            }
+            50% {
+                transform: translateY(-8px); /* Float up */
+            }
+        }
+
+        /* Glowing animation for button */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 15px rgba(0, 155, 255, 0.4), 0 0 30px rgba(0, 155, 255, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(0, 155, 255, 0.7), 0 0 40px rgba(0, 155, 255, 0.5);
+            }
+        }
+
+
+
 
         /* Footer Styles */
-        .footer-style {
-            background-color: #0041e4; /* Blue background */
+        .footer {
+            background: linear-gradient(to bottom, #0041e4, #002550); /* Blue gradient */
             color: #ffffff; /* White text */
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
 
-        .footer-style a {
-            color: #009bff; /* Light blue links */
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: #a7d4e7; /* Light blue */
+        }
+
+        .footer-column p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #f0f0f0; /* Light white */
+        }
+
+        .footer-link {
+            color: #60c6ff; /* Light blue link */
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
 
-        .footer-style a:hover {
-            color: #ffffff; /* White hover effect */
+        .footer-link:hover {
+            color: #009bff; /* Bright blue hover */
         }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            color: #ffffff; /* White icons */
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #60c6ff; /* Light blue on hover */
+            transform: scale(1.2); /* Slight zoom */
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            border-top: 1px solid #60c6ff; /* Subtle divider */
+            padding-top: 10px;
+            font-size: 0.9rem;
+            color: #a7d4e7; /* Subtle light blue */
+        }
+
     </style>
 
 </head>
@@ -267,9 +369,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 </li>
@@ -290,24 +389,38 @@
     </div>
 </div>
 
-<footer class="container-fluid text-center py-3 mt-5 footer-style">
-    <div class="row">
-        <div class="col-md-4">
-            <p>Contact Us: +123 456 789</p>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <!-- Contact Section -->
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <p>Phone: +123 456 789</p>
+                <p>Email: support@vetcare.com</p>
+                <p>Address: 123 VetCare Blvd, Cityville</p>
+            </div>
+            <!-- About Section -->
+            <div class="footer-column">
+                <h4>About VetCare</h4>
+                <p>We are dedicated to providing the highest quality veterinary care and ensuring the well-being of your furry friends.</p>
+            </div>
+            <!-- Social Links -->
+            <div class="footer-column">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fa fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa fa-twitter"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <p>© 2024 VetCare. All rights reserved.</p>
-        </div>
-        <div class="col-md-4">
-            <p>Follow Us:
-                <a href="#" class="social-icon">Facebook</a> |
-                <a href="#" class="social-icon">Instagram</a> |
-                <a href="#" class="social-icon">Twitter</a>
-            </p>
+        <div class="footer-bottom">
+            <p>©2024 VetCare. All rights reserved.</p>
         </div>
     </div>
 </footer>
-<!--BookAppointmentFloattingbutton-->
+
+<!--BookAppointment Floating button-->
 <a href="/appointments" class="book-appointment-btn">
     <i class="bi bi-calendar-check"></i>Book Now
 </a>
