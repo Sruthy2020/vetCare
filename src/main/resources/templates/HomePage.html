@@ -45,6 +45,7 @@
             font-size: 3.5em;
             color: #ffffff; /* Bright white */
             text-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333, 0 0 20px #ff3333, 0 0 30px #ff3333, 0 0 40px #ff3333;
+            font-family: 'Sergio Trendy', serif;
             margin-bottom: 20px;
             -webkit-text-stroke: 2px black;
             animation: glow 1.5s infinite alternate;
@@ -73,6 +74,7 @@
             font-size: 1.5em;
             color: #ffffff; /* Soft white */
             margin-bottom: 30px;
+            font-family: 'Sergio Trendy', serif;
             text-shadow: 0 0 2px #a7d4e7, 0 0 4px #41daff, 0 0 6px #3e99f8, 0 0 8px #34219f;
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
@@ -142,87 +144,154 @@
             max-height: 1200px;
             max-width: 1200px;
         }
-
-        /* Carousel Section */
-        .carousel {
-            margin: 190px 20px;
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-item {
-            flex: 1 0 100%;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .card {
-            background: #fff;
-            color: #333;
-            border-radius: 10px;
-            padding: 15px;
+        /* Services Section */
+        #services {
+            background: linear-gradient(to bottom, #3e99f8, #60c6ff); /* Gradient background */
+            color: #ffffff;
+            padding: 40px 20px;
             text-align: center;
-            width: 300px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .card img {
-            border-radius: 10px;
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #services h2 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        }
+
+        #services h2 span {
+            color: #0041e4; /* Bright red for emphasis */
+        }
+
+        .services-description {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .services h3 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            scroll-behavior: smooth;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 40px;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none; /* Hide scrollbar */
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+            scroll-snap-align: center; /* Center align each card */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-img {
+            width: 100%;
             height: 150px;
             object-fit: cover;
-        }
-
-        .card h5 {
-            margin: 15px 0 10px;
-            font-size: 1.2rem;
-        }
-
-        .card p {
-            font-size: 1rem;
+            border-radius: 10px;
             margin-bottom: 15px;
         }
 
-        .card-button {
-            background-color: #0041e4;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 5px;
-            display: inline-block;
-            transition: background 0.3s;
+        .service-item h4 {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
 
-        .card-button:hover {
+        .service-item p {
+            font-size: 1em;
+            color: #f0f0f0;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
             background-color: #009bff;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            border-radius: 30px;
+            border: 2px solid #009bff;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0041e4;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         /* Carousel Controls */
-        .carousel-control {
+        .prev-btn, .next-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+            background: #ffffff;
+            color: #3e99f8;
+            border: none;
+            padding: 10px 15px;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
             border-radius: 50%;
-            font-size: 1.5rem;
-            z-index: 2;
+            z-index: 100;
+            font-size: 1.5em;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .carousel-control-prev {
+        .prev-btn:hover, .next-btn:hover {
+            background: #009bff;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .prev-btn {
             left: 10px;
         }
 
-        .carousel-control-next {
+        .next-btn {
             right: 10px;
         }
+
+
     </style>
 </head>
 <body>
@@ -232,67 +301,116 @@
         <div class="welcome-page">
             <div class="overlay">
                 <h1 class="welcome-text">For Pets Who Steal Hearts and Snacks</h1>
-                <p class="subtitle">Making vet care as kind, compassionate, and stress-free as possible for your best friend.</p>
+                <p class="subtitle">Making vet care as kind, compassionate, and stress free as possible for your best friend.</p>
                 <a href="/appointments" class="button">Book an Appointment</a>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <div class="carousel">
-        <div class="carousel-inner">
-            <!-- First Carousel Item -->
-            <div class="carousel-item">
-                <div class="card">
-                    <img src="/assets/images/service01.jpg" alt="Find a clinic">
-                    <h5>Find a Clinic</h5>
-                    <p>We could be just next door!</p>
-                    <a href="/clinics" class="card-button">More Details</a>
-                </div>
-                <div class="card">
-                    <img src="/assets/images/service02.jpg" alt="Appointment Booking">
-                    <h5>Appointment Booking</h5>
-                    <p>Secure a spot!</p>
-                    <a href="/appointments" class="card-button">Book Now</a>
-                </div>
-                <div class="card">
-                    <img src="/assets/images/service03.jpg" alt="Medical Record">
-                    <h5>Medical Record</h5>
-                    <p>Keep track of your pet's health with us.</p>
-                    <a href="/access-medical-records" class="card-button">Find out more</a>
+    <section id="services">
+        <div class="services-container">
+            <h2>About <span>VetCare</span></h2>
+            <p class="services-description">
+                VetCare is dedicated to providing compassionate, high-quality veterinary care for your furry friends.
+                We offer a range of services to ensure their well-being and your peace of mind.
+            </p>
+            <div class="services">
+                <h3>Our Services</h3>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Service Items -->
+                        <div class="service-item">
+                            <img src="/assets/images/service01.jpg" alt="Find a Clinic" class="service-img">
+                            <h4>Find a Clinic</h4>
+                            <p>Locate trusted veterinary clinics near you.</p>
+                            <a href="/clinics" class="button">Go to Clinics</a>
+                        </div>
+                        <div class="service-item">
+                            <img src="/assets/images/service02.jpg" alt="Appointment Booking" class="service-img">
+                            <h4>Appointment Booking</h4>
+                            <p>Book appointments with ease for quality care.</p>
+                            <a href="/appointments" class="button">Book Appointment</a>
+                        </div>
+                        <div class="service-item">
+                            <img src="/assets/images/service03.jpg" alt="Medical Records" class="service-img">
+                            <h4>Medical Records</h4>
+                            <p>Manage and access your pet's health records.</p>
+                            <a href="/access-medical-records" class="button">View Records</a>
+                        </div>
+                        <div class="service-item">
+                            <img src="/assets/images/service04.jpg" alt="Prescription Management" class="service-img">
+                            <h4>Prescription Management</h4>
+                            <p>Request refills and manage prescriptions.</p>
+                            <a href="/prescription/order" class="button">Manage Prescriptions</a>
+                        </div>
+                        <div class="service-item">
+                            <img src="/assets/images/service05.jpg" alt="Profile Management" class="service-img">
+                            <h4>Profile Management</h4>
+                            <p>Update your account and pet profiles effortlessly.</p>
+                            <a href="/account" class="button">Edit Profile</a>
+                        </div>
+                        <div class="service-item">
+                            <img src="/assets/images/service06.jpg" alt="Resources" class="service-img">
+                            <h4>Resources</h4>
+                            <p>Access expert tips and pet wellness guides.</p>
+                            <a href="/resources" class="button">Explore Resources</a>
+                        </div>
+                    </div>
+                    <button class="prev-btn services-prev">❮</button>
+                    <button class="next-btn services-next">❯</button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Carousel Controls -->
-        <span class="carousel-control carousel-control-prev">&lt;</span>
-        <span class="carousel-control carousel-control-next">&gt;</span>
-    </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const carouselInner = document.querySelector('.carousel-inner');
-        const items = carouselInner.children;
-        const prevButton = document.querySelector('.carousel-control-prev');
-        const nextButton = document.querySelector('.carousel-control-next');
-        let currentIndex = 0;
+    <script>
+        // Carousel Auto-scroll for Services/Features Section
+        const carouselTrack = document.querySelector('.carousel-track');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
 
-        const updateCarousel = () => {
-            const offset = currentIndex * -100;
-            carouselInner.style.transform = `translateX(${offset}%)`;
-        };
+        if (carouselTrack) {
+            // Function to scroll carousel manually
+            function scrollCarousel(direction) {
+                const cardWidth = carouselTrack.querySelector('.service-item').offsetWidth + 20; // Card width + gap
+                carouselTrack.scrollBy({
+                    left: direction * cardWidth,
+                    behavior: 'smooth',
+                });
+            }
 
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
-            updateCarousel();
-        });
+            // Auto-scroll functionality
+            function autoScroll() {
+                const cardWidth = carouselTrack.querySelector('.service-item').offsetWidth + 20;
+                if (
+                    carouselTrack.scrollLeft + carouselTrack.clientWidth >=
+                    carouselTrack.scrollWidth
+                ) {
+                    // Reset to the beginning when reaching the end
+                    carouselTrack.scrollLeft = 0;
+                } else {
+                    // Scroll to the right
+                    carouselTrack.scrollBy({
+                        left: cardWidth,
+                        behavior: 'smooth',
+                    });
+                }
+            }
 
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
-            updateCarousel();
-        });
-    });
-</script>
+            // Event Listeners for Buttons
+            prevBtn?.addEventListener('click', () => scrollCarousel(-1));
+            nextBtn?.addEventListener('click', () => scrollCarousel(1));
+
+            // Set auto-scroll interval
+            const autoScrollInterval = setInterval(autoScroll, 4000); // Auto-scroll every 3 seconds
+
+            // Pause auto-scroll on hover
+            carouselTrack.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+            carouselTrack.addEventListener('mouseleave', () => setInterval(autoScroll, 3000));
+        }
+
+    </script>
+
 </body>
 </html>
