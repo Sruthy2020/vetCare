@@ -31,27 +31,15 @@
             z-index: 1;
         }
 
-        .profile-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
 
         .profile-image-container {
-            margin-top: 20px;
-            width: 120px;
-            height: 120px;
+            margin: 1px auto;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid #60c6ff;
+            border: 3px solid #60c6ff;
             position: relative;
-        }
-
-        .profile-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .upload-overlay {
@@ -75,29 +63,21 @@
             opacity: 1;
         }
 
-        .edit-profile-btn {
-            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(19, 33, 49, 0.7));
-            color: #f8f9fa;
-            border: #f9f7f3;
-            margin-left: auto;
-            padding: 7px 8px;
-            border-radius: 5px;
-            margin-top: 55px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: background 0.3s ease, transform 0.2s;
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .edit-profile-btn:hover {
-            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgb(62, 153, 248));
-            transform: translateY(-2px);
-        }
 
         .card {
             background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7));
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            padding: 1px;
+            text-align: left;
         }
 
         .card h2 {
@@ -151,78 +131,6 @@
             margin: 0;
         }
 
-        /* Dropdown container */
-        .dropdown {
-            position: relative;
-        }
-
-        /* Dropdown toggle link */
-        .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(19, 33, 49, 0.7));
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: background 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .dropdown-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #60c6ff;
-            text-decoration: none;
-        }
-
-        /* Dropdown menu */
-        .dropdown-menu {
-            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgb(62, 153, 248));
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            padding: 10px 0;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            min-width: 200px;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-
-        /* Show dropdown menu on hover */
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        /* Dropdown items */
-        .dropdown-menu .dropdown-item {
-            color: #ffffff;
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 14px;
-            display: block;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .dropdown-menu .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #60c6ff;
-        }
-
-        /* Divider inside the dropdown menu */
-        .dropdown-divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            margin: 0.5rem 0;
-        }
 
         /* Modal Header Styling */
         .modal-header {
@@ -292,6 +200,29 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .btn-primary {
+            background: linear-gradient(90deg, #0041e4, #009bff);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #009bff, #0041e4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .mt-3 {
+            margin-bottom: 1rem !important;
+        }
+
+
+
 
     </style>
 </head>
@@ -299,9 +230,9 @@
 <div class="overlay"></div>
 <div layout:fragment="content">
     <div class="container">
-        <div class="profile-container">
+        <div class="container text-center mt-5">
             <!-- Profile Image -->
-            <div class="profile-image-container">
+            <div class="profile-image-container mx-auto">
                 <img src="/assets/images/default.png" alt="User Profile Picture">
                 <div class="upload-overlay" onclick="document.getElementById('upload-profile').click();">
                     Upload Photo
@@ -309,33 +240,25 @@
                 <input type="file" id="upload-profile" style="display: none;" accept="image/*">
             </div>
 
-            <!-- Edit Profile Button -->
-            <button class="edit-profile-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                Edit Profile
-            </button>
-            <button type="button" class="edit-profile-btn" data-bs-toggle="modal"
-                    data-bs-target="#deleteProfileModal">
-                Delete Profile
-            </button>
+            <!-- Username and Action Buttons -->
+            <div class="d-flex align-items-center justify-content-center mt-3 gap-3">
+                <!-- Edit Profile Button -->
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    Edit Profile
+                </button>
 
-            <div class="dropdown mt-auto">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                   id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    <strong th:text="${loggedInUser.name}">User Name</strong>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                    <li><hr class="dropdown-divider"></li>
-                    <li th:if="${loggedInUser != null}">
-                        <form th:action="@{/logout}" method="post" style="display: inline;">
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+                <!-- Username Button -->
+                <form method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-primary">
+                        <span th:text="${loggedInUser.name}">User Name</span>
+                    </button>
+                </form>
+
+                <!-- Delete Profile Button -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProfileModal">
+                    Delete Profile
+                </button>
             </div>
-
-        </div>
-
-
 
 
         <!-- User Info -->
@@ -358,7 +281,6 @@
                 <div class="col-sm-9" th:text="${user.address}">123 Vet Street</div>
             </div>
         </div>
-
         <!-- Dashboard Cards -->
         <div class="dashboard-cards">
             <div class="dashboard-card" href="/dashboard/appointment-management" >
@@ -374,6 +296,85 @@
                 <h3>Pet Management</h3>
             </div>
         </div>
+
+
+        <div class="modal fade" id="editProfileModal" tabindex="-1"
+             aria-labelledby="editProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/account/edit}" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                       th:value="${user.name}" required pattern="(Dr\.\s*)?[a-zA-Z\s]+" title="Name should only contain letters.">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       th:value="${user.email}" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                       name="password" th:value="${user.password}" required minlength="6">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phoneNumber"
+                                       th:value="${user.phoneNumber}" required pattern="\d+" title="Phone number must be in digits.">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                       th:value="${user.address}"  >
+                            </div>
+                            <div class="mb-3">
+                                <label for="userType" class="form-label">User Type</label>
+                                <select class="form-control" id="userType" name="userType" required disabled>
+                                    <option value="User" th:selected="${user.userType == 'User'}">User</option>
+                                    <option value="Vet" th:selected="${user.userType == 'Vet'}">Vet</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteProfileModal" tabindex="-1"
+             aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProfileModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete your profile?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                        </button>
+                        <form th:action="@{/account/delete}" method="post" id="deleteProfileForm">
+                            <button type="submit" class="btn btn-danger">Delete Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
     </div>
 </div>
 
