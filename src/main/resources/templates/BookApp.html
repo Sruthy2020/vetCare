@@ -4,21 +4,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book an Appointment with a Veterinarian</title>
-    <link href="/static/assets/css/BookApp.css" rel="stylesheet">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.css">
+<style>
+    /* General body styling for the appointment form */
+    body {
+        background: url('/assets/images/profile-dashboard.png') no-repeat center center/cover rgba(0, 0, 0, 0.6);
+        font-family: Arial, sans-serif;
+        color: #fff;
+    }
+
+    /* Container styling */
+    .contStyling {
+        background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7));
+        color: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .form-control {
+        display: block;
+        color: black;
+        background: linear-gradient(90deg, #ffffff, transparent);
+    }
+
+    /* Title styling */
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Subtitle styling */
+    h5 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    /* Form labels */
+    label {
+        font-weight: bold;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        display: block;
+        color: #f8f9fa;
+        font-family: emoji;
+    }
 
 
 
 
-    <link th:href="@{/assets/css/BookApp.css}" rel="stylesheet">
+    /* Input and select styling */
+    input[type="text"],
+    select,
+    textarea {
+        border: 1px solid #0041e4;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        font-size: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+        color: black;
+        background: linear-gradient(90deg, #ffffff, transparent);
+    }
+
+
+
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #60c6ff;
+        box-shadow: 0 0 8px rgba(96, 198, 255, 0.8);
+        outline: none;
+    }
+
+    /* Buttons */
+    button {
+        background: linear-gradient(90deg, #0041e4, #009bff);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+        background: linear-gradient(90deg, #009bff, #0041e4);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal button for adding pets */
+    #add-pet-button {
+        background: linear-gradient(359deg, #000000, transparent);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+    }
+
+    #add-pet-button:hover {
+        background:  linear-gradient(359deg, transparent, #000000);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Pricing box styling */
+    .pricing-box {
+        background: linear-gradient(180deg, #206c9a, #000000, transparent);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 15px;
+    }
+
+    .pricing-box h5 {
+        font-size: 1.25rem;
+        color: #0041e4;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* Styling the unordered list */
+    .pricing-box ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* List items */
+    .pricing-box li {
+        display: block;
+        background: linear-gradient(180deg, #617bad, #001432);
+        border: 1px solid #000000;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        color: #ffffff;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Hover effect on list items */
+    .pricing-box li:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Highlight active/prioritized list items */
+    .pricing-box li[data-service-id="3"] {
+        background: linear-gradient(180deg, #9bbdef, black);
+        border: 1px solid #8dadff;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    /* Navigation buttons between steps */
+    #appointmentForm button {
+        width: 30%;
+        margin: 10px 0;
+        background: linear-gradient(359deg, #000000, transparent);
+    }
+
+    /* Step indicator */
+    #step-indicator {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    #step-indicator .step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #cccccc;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        margin: 0 5px;
+        transition: background 0.3s ease;
+    }
+
+    #step-indicator .step.active {
+        background: #0041e4;
+        box-shadow: 0 0 8px rgba(96, 198, 255, 0.8);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .pricing-box {
+            padding: 15px;
+        }
+
+        .pricing-box li {
+            font-size: 0.9rem;
+        }
+
+        button {
+            font-size: 0.9rem;
+            padding: 10px 15px;
+        }
+
+        .pricing-box ul {
+            font-size: 0.9rem;
+        }
+    }
+
+</style>
+
+
+
+<!--    <link th:href="@{/assets/css/BookApp.css}" rel="stylesheet">-->
 </head>
 <body>
+<div class="overlay"></div>
 <div layout:fragment="content">
-
-    <div class="container mt-5">
+    <div class="contStyling">
+        <div class="container text-center mt-5">
         <h2 class="text-center">Book an Appointment with a Vet</h2>
         <form  th:action="@{/add}" method="post" id="appointmentForm" class="mx-auto form-container">
             <!--        Step 1 - Choose the pet -->
@@ -107,6 +349,7 @@
     <script src="/scripts/BookApp.js"></script>
 
 
+</div>
 </div>
 </body>
 

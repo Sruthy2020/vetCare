@@ -39,6 +39,8 @@ p {
 }
 .navbar-nav .nav-link {
     color: #fff;
+    font-size: 1.0rem;
+    margin-right: 10px;
 }
 
 .navbar-nav .nav-link:hover {
