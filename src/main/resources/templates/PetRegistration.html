@@ -8,23 +8,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: #fff;
             margin: 0;
             padding: 0;
         }
 
-        #appointmentForm button {
-            /* width: 30%; */
-            /* margin: 10px 0; */
-            /* background: linear-gradient(359deg, #000000, transparent); */
-        }
-
-
         .modal-content {
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             background: #fff;
+            border: black;
         }
 
         .modal-header {
@@ -33,6 +26,7 @@
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
             padding: 15px;
+            border: black;
         }
 
         .modal-title {
@@ -43,9 +37,8 @@
         }
 
         #appointmentForm button {
-            /* width: 3%; */
             margin: 1px 0;
-            /* background: linear-gradient(359deg, #000000, transparent); */
+            background: linear-gradient(359deg, #000000, transparent);
         }
 
         .btn-close {
@@ -61,11 +54,12 @@
 
         .modal-body {
             padding: 20px;
+            background: linear-gradient(180deg, rgba(0, 37, 80, 0.7), rgba(62, 153, 248, 0.7));
         }
 
         .form-group label {
             font-weight: bold;
-            color: #0041e4;
+            color: #ffffff;
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 1px;
@@ -131,8 +125,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addPetModalLabel">Add New Pet</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <a class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></a>
             </div>
             <div class="modal-body">
                 <form th:action="@{/pets/register}" method="post" id="add-pet-form">
@@ -144,7 +138,7 @@
                     <div class="form-group">
                         <label for="petAge">Pet Age:</label>
                         <input type="number" class="form-control" id="petAge" name="age"
-                               placeholder="Enter pet age" required>
+                               placeholder="Enter pet age" required min="1">
                     </div>
                     <div class="form-group">
                         <label for="petGender">Pet Gender:</label>
